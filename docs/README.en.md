@@ -100,13 +100,17 @@ Before installing and using this software, please prepare the following:
 
 ### 1. Download & Install
 
-| Operating System | GitHub Download                                          | Gitee Download (Recommended for China)                      | Note               |
-| :--------------: | :------------------------------------------------------ | :---------------------------------------------------------- | :----------------- |
-| Windows          | [Release](https://github.com/HBAI-Ltd/Toonflow-app/releases) | [Release](https://gitee.com/HBAI-Ltd/Toonflow-app/releases) | Official installer |
-| Linux            | ⚙️ Coming soon                                          | ⚙️ Coming soon                                              | To be released     |
-| macOS            | ⚙️ Coming soon                                          | ⚙️ Coming soon                                              | To be released     |
+| Operating System | GitHub Download                                              | 123YunPan Download                                         | Description                                                 |
+| :--------------: | :---------------------------------------------------------- | :-------------------------------------------------------- | :---------------------------------------------------------- |
+| Windows          | [Release](https://github.com/HBAI-Ltd/Toonflow-app/releases) | [123YunPan](https://www.123865.com/s/bkn5Vv-E67cv)        | Official release installation package                       |
+|  Linux           | ⚙️ Coming soon                                              | ⚙️ Coming soon                                            | To be released soon                                         |
+|  macOS           | ⚙️ Coming soon                                              | ⚙️ Coming soon                                            | To be released soon                                         |
 
-> Note: Currently, only Windows is supported. Other systems will be gradually supported.
+> ⚠️ If 123YunPan prompts for payment, it is only due to bandwidth limitations. This software is completely open-source and free.
+
+> Currently, only the Windows version is supported. Other systems will be released gradually.
+
+> Due to Gitee OS environment and file size restrictions for Release uploads, Gitee Release download links are not provided for now.
 
 ### 2. Launch the Service
 
