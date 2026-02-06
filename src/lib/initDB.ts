@@ -228,6 +228,16 @@ export default async (knex: Knex, forceInit: boolean = false): Promise<void> => 
       },
     },
     {
+      name: "t_aiModelMap",
+      builder: (table) => {
+        table.integer("id").notNullable();
+        table.integer("promptsId"); // 提示词表ID
+        table.integer("configId"); // 模型列表id
+        table.primary(["id"]);
+        table.unique(["id"]);
+      },
+    },
+    {
       name: "t_prompts",
       builder: (table) => {
         table.integer("id").notNullable();
