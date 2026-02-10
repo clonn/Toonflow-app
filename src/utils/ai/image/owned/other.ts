@@ -56,7 +56,6 @@ export default async (input: ImageConfig, config: AIConfig): Promise<string> => 
         },
       },
     });
-    console.log("%c Line:46 🍌 result", "background:#ea7e5c", result);
 
     if (result.files && result.files.length) {
       let imageBase64;
@@ -72,28 +71,24 @@ export default async (input: ImageConfig, config: AIConfig): Promise<string> => 
       }
       const mdMatch = result.text.match(/^!\[.*?\]\((.+?)\)$/);
       if (mdMatch) {
-        console.log("%c Line:75 🍎", "background:#42b983");
         const imgInfo = mdMatch[1];
         const base64InMd = imgInfo.match(/data:image\/[a-z]+;base64,(.+)/);
         if (base64InMd) {
-          console.log("%c Line:79 🌮", "background:#ffdd4d");
           return imgInfo;
         } else {
-          console.log("%c Line:82 🧀", "background:#33a5ff");
           return await urlToBase64(imgInfo);
         }
       }
       const base64Match = result.text.match(/base64,([A-Za-z0-9+/=]+)/);
-      console.log("%c Line:87 🍆 base64Match", "background:#2eafb0", base64Match);
+
       if (base64Match) {
         return "data:image/jpeg;base64," + base64Match[1];
       }
       // 检查是否为图片直链 url
       if (/^https?:\/\/.*\.(png|jpg|jpeg|gif|webp|bmp)$/i.test(result.text)) {
-        console.log("%c Line:93 🍪", "background:#93c0a4");
         return await urlToBase64(result.text);
       }
-      console.log("%c Line:96 🌰", "background:#ffdd4d");
+
       // 默认情况
       return result.text;
     }
