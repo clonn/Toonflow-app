@@ -1,6 +1,7 @@
 import "../type";
 import { generateImage, generateText, ModelMessage } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import axios from "axios";
 
 export default async (input: ImageConfig, config: AIConfig): Promise<string> => {
   if (!config.model) throw new Error("缺少Model名称");
@@ -67,11 +68,26 @@ export default async (input: ImageConfig, config: AIConfig): Promise<string> => 
         console.error(JSON.stringify(result.response, null, 2));
         throw new Error("图片生成失败");
       }
-      const match = result.text.match(/base64,([A-Za-z0-9+/=]+)/);
-      const base64Str = match && match[1] ? match[1] : result.text;
-
-      // 返回生成的图片 base64
-      return "data:image/jpeg;base64," + base64Str!;
+      const mdMatch = result.text.match(/^!\[.*?\]\((.+?)\)$/);
+      if (mdMatch) {
+        const imgInfo = mdMatch[1];
+        const base64InMd = imgInfo.match(/data:image\/[a-z]+;base64,(.+)/);
+        if (base64InMd) {
+          return imgInfo;
+        } else {
+          return await urlToBase64(imgInfo);
+        }
+      }
+      const base64Match = result.text.match(/base64,([A-Za-z0-9+/=]+)/);
+      if (base64Match) {
+        return "data:image/jpeg;base64," + base64Match[1];
+      }
+      // 检查是否为图片直链 url
+      if (/^https?:\/\/.*\.(png|jpg|jpeg|gif|webp|bmp)$/i.test(result.text)) {
+        return await urlToBase64(result.text);
+      }
+      // 默认情况
+      return result.text;
     }
   } else {
     const { image } = await generateImage({
@@ -87,3 +103,10 @@ export default async (input: ImageConfig, config: AIConfig): Promise<string> => 
     return image.base64;
   }
 };
+
+async function urlToBase64(url: string): Promise<string> {
+  const res = await axios.get(url, { responseType: "arraybuffer" });
+  const base64 = Buffer.from(res.data).toString("base64");
+  const mimeType = res.headers["content-type"] || "image/png";
+  return `data:${mimeType};base64,${base64}`;
+}

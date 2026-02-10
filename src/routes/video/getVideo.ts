@@ -28,7 +28,7 @@ export default router.post(
           qb.whereIn("id", specifyIds);
         }
       })
-      .select("id", "configId", "time", "resolution", "prompt", "firstFrame", "filePath", "storyboardImgs", "model", "scriptId", "state");
+      .select("id", "configId", "time", "resolution", "prompt", "firstFrame", "filePath", "storyboardImgs", "model", "scriptId", "state","errorReason");
     // const videoIds: number[] = videos.map((video: any) => (typeof video.id === "string" ? parseInt(video.id) : video.id));
 
     // let tempAssets: TempAsset[] = await u

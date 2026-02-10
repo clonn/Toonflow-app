@@ -196,7 +196,10 @@ ${prompt}
     }
   } catch (err) {
     console.error(`视频生成失败 videoId=${videoId}:`, err);
-    await u.db("t_video").where("id", videoId).update({ state: -1 });
+    await u
+      .db("t_video")
+      .where("id", videoId)
+      .update({ state: -1, errorReason: u.error(err).message });
   }
 }
 
