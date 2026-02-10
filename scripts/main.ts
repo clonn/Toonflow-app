@@ -18,7 +18,11 @@ function createMainWindow(): void {
 }
 app.whenReady().then(async () => {
   createMainWindow();
-  await startServe();
+  try {
+    await startServe();
+  } catch (err) {
+    console.error("[服务启动失败]:", err);
+  }
 });
 
 app.on("window-all-closed", () => {

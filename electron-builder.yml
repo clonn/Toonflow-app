@@ -18,6 +18,7 @@ files:
   - "!**/*.d.ts"
   - "!src/**/*"
   - "!scripts/**/*.ts"
+  - "!scripts/*.ts"
 
 asar: true
 
